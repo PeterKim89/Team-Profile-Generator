@@ -5,8 +5,9 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const employeeList = [];
+
 // initial manager information prompt
-const managerInput = function() {
+const managerInput = () => {
     inquirer.prompt ([
 	{
 		type: "input",
@@ -34,13 +35,14 @@ const managerInput = function() {
 		message: "What would you like to do next?",
 		choices: ["Add an Engineer", "Add an Intern", "Finish building my team"],
 	}
-])
-    .then(function (name, id, email, officeNumber) {
-        let newEmployee = new Manager(name, id, email, officeNumber);
+    ])
+// make a new Manager and push it to the employee array
+    .then((answers) => {
+        let newEmployee = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
         employeeList.push(newEmployee);
-})
-
-    return nextChoice;
+        console.log(employeeList);
+        nextEmployee(answers.nextChoice);
+    })
 };
 
 const engineerInput = function() {
@@ -72,12 +74,14 @@ const engineerInput = function() {
 		choices: ["Add an Engineer", "Add an Intern", "Finish building my team"],
 	}
 ])
-    .then(function (name, id, email, github) {
-        let newEmployee = new Engineer(name, id, email, github);
+    .then(function (answers) {
+        let newEmployee = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         employeeList.push(newEmployee);
+        console.log(employeeList);
+        nextEmployee(answers.nextChoice);
     })
 
-    return nextChoice;
+    
 };
 
 const internInput = function() {
@@ -109,12 +113,13 @@ const internInput = function() {
 		choices: ["Add an Engineer", "Add an Intern", "Finish building my team"],
 	}
 ])
-    .then(function (name, id, email, school){ 
-        let newEmployee = new Intern(name, id, email, school);
+    .then(function (answers){ 
+        let newEmployee = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         employeeList.push(newEmployee);
+        nextEmployee(answers.nextChoice);
     })
 
-    return nextChoice;
+    
 };
 
 // recursive call to keep asking if another employee should be added
@@ -130,3 +135,9 @@ const nextEmployee = function(nextChoice) {
     }
 }
 
+function init() {
+    managerInput();
+    
+    // console.log(employeeList);
+}
+init();
