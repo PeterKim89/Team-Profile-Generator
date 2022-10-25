@@ -7,7 +7,6 @@ describe("Employee class", () => {
 	});
 
 	it("Assigns the employee a name", () => {
-       
 		expect(employee.name).toBe("Peter");
 	});
 

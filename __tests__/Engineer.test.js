@@ -35,7 +35,7 @@ describe("Engineer class", () => {
 	});
 
 	describe("getEmail()", () => {
-		it("Returns the employee's email address", () => {
+		it("Returns the engineer's email address", () => {
 			expect(engineer.getEmail()).toBe("test@gmail.com");
 		});
 	});
