@@ -4,7 +4,10 @@ const fs = require("fs");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const managerInput = [
+const employeeList = [];
+// initial manager information prompt
+const managerInput = function() {
+    inquirer.prompt ([
 	{
 		type: "input",
 		name: "managerName",
@@ -30,9 +33,18 @@ const managerInput = [
 		name: "nextChoice",
 		message: "What would you like to do next?",
 		choices: ["Add an Engineer", "Add an Intern", "Finish building my team"],
-	},
-];
-const engineerInput = [
+	}
+])
+    .then(function (name, id, email, officeNumber) {
+        let newEmployee = new Manager(name, id, email, officeNumber);
+        employeeList.push(newEmployee);
+})
+
+    return nextChoice;
+};
+
+const engineerInput = function() {
+    inquirer.prompt ([
     {
         type: "input",
         name: "engineerName",
@@ -52,9 +64,24 @@ const engineerInput = [
         type: "input",
         name: "engineerGithub",
         message: "What is the engineer's github username?"
-    }
-];
-const internInput = [
+    },
+    {
+		type: "list",
+		name: "nextChoice",
+		message: "What would you like to do next?",
+		choices: ["Add an Engineer", "Add an Intern", "Finish building my team"],
+	}
+])
+    .then(function (name, id, email, github) {
+        let newEmployee = new Engineer(name, id, email, github);
+        employeeList.push(newEmployee);
+    })
+
+    return nextChoice;
+};
+
+const internInput = function() {
+    inquirer.prompt ([
     {
         type: "input",
         name: "internName",
@@ -74,15 +101,30 @@ const internInput = [
         type: "input",
         name: "internSchool",
         message: "What is the intern's school?"
+    },
+    {
+		type: "list",
+		name: "nextChoice",
+		message: "What would you like to do next?",
+		choices: ["Add an Engineer", "Add an Intern", "Finish building my team"],
+	}
+])
+    .then(function (name, id, email, school){ 
+        let newEmployee = new Intern(name, id, email, school);
+        employeeList.push(newEmployee);
+    })
+
+    return nextChoice;
+};
+
+const nextEmployee = function(nextChoice) {
+    if (nextChoice === "Add an Engineer") {
+        nextEmployee(engineerInput);
     }
-]
-
-
-function teamBuilder(answers) {
-    const nextChoice = answers.nextChoice;
-    const teamBuilderQuestions = [];
-    let x = 1;
-    while (x === 1) {
-
+    else if (nextChoice === "Add an Intern") {
+        nextEmployee(internInput);
+    }
+    else {
+        return employeeList;
     }
 }
