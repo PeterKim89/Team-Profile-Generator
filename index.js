@@ -75,6 +75,7 @@ const engineerInput = function() {
 	}
 ])
     .then(function (answers) {
+        console.log("What on earth");
         let newEmployee = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
         employeeList.push(newEmployee);
         console.log(employeeList);
@@ -125,13 +126,15 @@ const internInput = function() {
 // recursive call to keep asking if another employee should be added
 const nextEmployee = function(nextChoice) {
     if (nextChoice === "Add an Engineer") {
-        nextEmployee(engineerInput);
+        console.log("Engineer attempted");
+        engineerInput();
     }
     else if (nextChoice === "Add an Intern") {
-        nextEmployee(internInput);
+        console.log("Intern attempted");
+        internInput();
     }
     else {
-        return employeeList;
+        console.log("HUH");
     }
 }
 
