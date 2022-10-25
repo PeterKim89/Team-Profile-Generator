@@ -117,6 +117,7 @@ const internInput = function() {
     return nextChoice;
 };
 
+// recursive call to keep asking if another employee should be added
 const nextEmployee = function(nextChoice) {
     if (nextChoice === "Add an Engineer") {
         nextEmployee(engineerInput);
@@ -128,3 +129,4 @@ const nextEmployee = function(nextChoice) {
         return employeeList;
     }
 }
+
