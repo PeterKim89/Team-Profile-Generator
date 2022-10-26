@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-
+const generateCards = require('./src/generateHTML')
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -218,37 +218,6 @@ const nextEmployeeTest = () => {
 // 	}
 // };
 
-const generateHTML = () => {
-	return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Team Profiles</title>  
-        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.33.0/dist/full.css" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
-        <header>
-            <div id="navbar" class="navbar-center">
-                <a id="navbar-text" class="btn btn-ghost normal-case text-xl">Team Profiles</a>
-            </div>
-        </header>
-        <main>
-            <div class="card">
-                <div id="employee-cards" class="flex justify-evenly">
-                    
-                </div>
-            </div>
-        </main>
-        
-    </body>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    </html>
-    `;
-};
-
 function writeFile(data) {
     fs.writeFile('./dist/index.html', data, err => {
         if(err) {
@@ -267,12 +236,10 @@ function init() {
 	managerInput()
     .then (nextEmployeeTest)
 
-    // temporary
-    .then (generateHTML)
-    
-    // .then(employeeList => {
-    //     generateHTML(employeeCards)
-    // })
+    .then(employeeList => {
+        // console.log(employeeList)
+        return generateCards(employeeList)
+    })
 
     .then(html => {
         return writeFile(html);
