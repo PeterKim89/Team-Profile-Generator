@@ -266,7 +266,14 @@ function init() {
 
 	managerInput()
     .then (nextEmployeeTest)
+
+    // temporary
     .then (generateHTML)
+    
+    // .then(employeeList => {
+    //     generateHTML(employeeCards)
+    // })
+
     .then(html => {
         return writeFile(html);
     })
