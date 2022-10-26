@@ -239,6 +239,7 @@ function init() {
     .then(employeeList => {
         // console.log(employeeList)
         return generateCards(employeeList)
+        
     })
 
     .then(html => {

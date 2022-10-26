@@ -1,4 +1,4 @@
-let teamCards;
+// let teamCards;
 
 const managerCard = (manager) => {
     return `
@@ -11,8 +11,8 @@ const managerCard = (manager) => {
             <h3>Office Number: ${manager.officeNumber}</h3>            
         </div>
     </div>
-    `
-}
+    `;
+};
 
 const engineerCard = (engineer) => {
     return `
@@ -25,8 +25,8 @@ const engineerCard = (engineer) => {
             <h3>Office Number: ${engineer.github}</h3>            
         </div>
     </div>
-    `
-}
+    `;
+};
 
 const internCard = (intern) => {
     return `
@@ -39,8 +39,8 @@ const internCard = (intern) => {
             <h3>Office Number: ${intern.school}</h3>
         </div>
     </div>
-    `
-}
+    `;
+};
 
 generateCards = (employeeList) => {
     // array for cards 
@@ -67,16 +67,16 @@ generateCards = (employeeList) => {
             const internHTML = internCard(employee);
             cardArray.push(internHTML);
         } 
-    }
+    };
 
     // joining strings 
-    teamCards = cardArray.join('')
+    let teamCards = cardArray.join(" ")
 
     // return to generated page
     const generateTeam = generateHTML(teamCards); 
     console.log(generateTeam);
     return generateTeam;
-}
+};
 
 const generateHTML = (teamCards) => {
 	return `
